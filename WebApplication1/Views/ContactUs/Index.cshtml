@@ -1,0 +1,47 @@
+﻿﻿@model WebApplication1.Models.ContactUsViewModel
+
+@{
+    ViewBag.Title = "Contact";
+}
+
+<script src="https://www.google.com/recaptcha/api.js?render=Your Site Key"></script>
+<script>
+    grecaptcha.ready(function () {
+        grecaptcha.execute('Your Site Key', { action: 'ContactUs' }).then(function (token) {
+            $("#GoogleCaptchaToken").val(token);
+        });
+    });
+</script>
+
+<main aria-labelledby="title">
+    <h3>Contact Form</h3>
+
+    <div class="container">
+        <form action="/ContactUs" method="post">
+            <div class="form-group">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" class="form-control" name="FirstName" placeholder="Your name..">
+            </div>
+
+            <div class="form-group">
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" class="form-control" name="LastName" placeholder="Your last name..">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" class="form-control" name="Email" placeholder="Your email..">
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="Message" class="form-control" placeholder="Write something.."></textarea>
+            </div>
+
+            <div class="mt-4">
+                <input type="hidden" name="GoogleCaptchaToken" id="GoogleCaptchaToken" />
+                <input type="submit" class="btn btn-rounded btn-info" value="Submit">
+            </div>
+        </form>
+    </div>
+</main>
